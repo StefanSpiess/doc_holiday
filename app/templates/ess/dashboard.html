@@ -11,8 +11,12 @@
     <div class="card mt-3">
         <div class="card-body">
             <h5 class="card-title">Address Information</h5>
-            <p>{{ data.address.street }} {{ data.address.house_number }}, {{ data.address.zip_code }} {{ data.address.city }}</p>
-            <p><strong>Concern Of:</strong> {{ data.address.concern_of }}</p>
+            {% if data.address %}
+                <p>{{ data.address.street or "No street available" }} {{ data.address.house_number or "No house number available" }}, {{ data.address.zip_code or "No ZIP code available" }} {{ data.address.city or "No city available" }}</p>
+                <p><strong>Concern Of:</strong> {{ data.address.concern_of or "No concern specified" }}</p>
+            {% else %}
+                <p>No address information available.</p>
+            {% endif %}
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editAddressModal">Update</button>
         </div>
     </div>
@@ -21,14 +25,18 @@
     <div class="card mt-3">
         <div class="card-body">
             <h5 class="card-title">Emergency Contact</h5>
-            <p>{{ data.emergency_contact.street }} {{ data.emergency_contact.house_number }}, {{ data.emergency_contact.zip_code }} {{ data.emergency_contact.city }}</p>
-            <p><strong>Concern Of:</strong> {{ data.emergency_contact.concern_of }}</p>
-            <p><strong>Contact Information:</strong></p>
-            <ul>
-                <li>Mobile: {{ data.emergency_contact.contact_information.mobile_number }}</li>
-                <li>Landline: {{ data.emergency_contact.contact_information.landline_number }}</li>
-                <li>Email: {{ data.emergency_contact.contact_information.email_address }}</li>
-            </ul>
+            {% if data.emergency_contact %}
+                <p>{{ data.emergency_contact.street or "No street available" }} {{ data.emergency_contact.house_number or "No house number available" }}, {{ data.emergency_contact.zip_code or "No ZIP code available" }} {{ data.emergency_contact.city or "No city available" }}</p>
+                <p><strong>Concern Of:</strong> {{ data.emergency_contact.concern_of or "No concern specified" }}</p>
+                <p><strong>Contact Information:</strong></p>
+                <ul>
+                    <li>Mobile: {{ data.emergency_contact.contact_information.mobile_number or "No mobile number available" }}</li>
+                    <li>Landline: {{ data.emergency_contact.contact_information.landline_number or "No landline available" }}</li>
+                    <li>Email: {{ data.emergency_contact.contact_information.email_address or "No email available" }}</li>
+                </ul>
+            {% else %}
+                <p>No emergency contact information available.</p>
+            {% endif %}
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editEmergencyModal">Update</button>
         </div>
     </div>
@@ -46,23 +54,23 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="street" class="form-label">Street</label>
-                        <input type="text" class="form-control" id="street" name="street" value="{{ data.address.street }}" required>
+                        <input type="text" class="form-control" id="street" name="street" value="{{ data.address.street if data.address else '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="house_number" class="form-label">House Number</label>
-                        <input type="text" class="form-control" id="house_number" name="house_number" value="{{ data.address.house_number }}" required>
+                        <input type="text" class="form-control" id="house_number" name="house_number" value="{{ data.address.house_number if data.address else '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="zip_code" class="form-label">Zip Code</label>
-                        <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ data.address.zip_code }}" required>
+                        <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ data.address.zip_code if data.address else '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="city" class="form-label">City</label>
-                        <input type="text" class="form-control" id="city" name="city" value="{{ data.address.city }}" required>
+                        <input type="text" class="form-control" id="city" name="city" value="{{ data.address.city if data.address else '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="concern_of" class="form-label">Concern Of</label>
-                        <input type="text" class="form-control" id="concern_of" name="concern_of" value="{{ data.address.concern_of }}" required>
+                        <input type="text" class="form-control" id="concern_of" name="concern_of" value="{{ data.address.concern_of if data.address else '' }}">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -86,37 +94,37 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="street" class="form-label">Street</label>
-                        <input type="text" class="form-control" id="street" name="street" value="{{ data.emergency_contact.street }}" required>
+                        <input type="text" class="form-control" id="street" name="street" value="{{ data.emergency_contact.street if data.emergency_contact else '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="house_number" class="form-label">House Number</label>
-                        <input type="text" class="form-control" id="house_number" name="house_number" value="{{ data.emergency_contact.house_number }}" required>
+                        <input type="text" class="form-control" id="house_number" name="house_number" value="{{ data.emergency_contact.house_number if data.emergency_contact else '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="zip_code" class="form-label">Zip Code</label>
-                        <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ data.emergency_contact.zip_code }}" required>
+                        <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ data.emergency_contact.zip_code if data.emergency_contact else '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="city" class="form-label">City</label>
-                        <input type="text" class="form-control" id="city" name="city" value="{{ data.emergency_contact.city }}" required>
+                        <input type="text" class="form-control" id="city" name="city" value="{{ data.emergency_contact.city if data.emergency_contact else '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="concern_of" class="form-label">Concern Of</label>
-                        <input type="text" class="form-control" id="concern_of" name="concern_of" value="{{ data.emergency_contact.concern_of }}" required>
+                        <input type="text" class="form-control" id="concern_of" name="concern_of" value="{{ data.emergency_contact.concern_of if data.emergency_contact else '' }}">
                     </div>
                     <hr>
                     <h6>Contact Information</h6>
                     <div class="mb-3">
                         <label for="mobile_number" class="form-label">Mobile Number</label>
-                        <input type="text" class="form-control" id="mobile_number" name="mobile_number" value="{{ data.emergency_contact.contact_information.mobile_number }}" required>
+                        <input type="text" class="form-control" id="mobile_number" name="mobile_number" value="{{ data.emergency_contact.contact_information.mobile_number if data.emergency_contact and data.emergency_contact.contact_information else '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="landline_number" class="form-label">Landline Number</label>
-                        <input type="text" class="form-control" id="landline_number" name="landline_number" value="{{ data.emergency_contact.contact_information.landline_number }}">
+                        <input type="text" class="form-control" id="landline_number" name="landline_number" value="{{ data.emergency_contact.contact_information.landline_number if data.emergency_contact and data.emergency_contact.contact_information else '' }}">
                     </div>
                     <div class="mb-3">
                         <label for="email_address" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email_address" name="email_address" value="{{ data.emergency_contact.contact_information.email_address }}" required>
+                        <input type="email" class="form-control" id="email_address" name="email_address" value="{{ data.emergency_contact.contact_information.email_address if data.emergency_contact and data.emergency_contact.contact_information else '' }}">
                     </div>
                 </div>
                 <div class="modal-footer">
