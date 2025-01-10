@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}ESS Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Employee Self Service Dashboard</h1>
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">Address Information</h5>
+            <p>{{ data.address.address if data.address else "No address found" }}</p>
+            <a href="/ess/update/address" class="btn btn-primary">Update</a>
+        </div>
+    </div>
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">Emergency Contact</h5>
+            <p>{{ data.emergency_contact.address if data.emergency_contact else "No emergency contact found" }}</p>
+            <a href="/ess/update/emergency_contact" class="btn btn-primary">Update</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

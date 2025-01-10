@@ -1,0 +1,25 @@
+# Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Environment files
+*.env
+*.venv
+.env
+*.env.*
+*.secret
+
+# Flask-specific files
+instance/
+*.sqlite3
+
+# Virtual environments
+doc_holiday_env/
+
+# VS Code configuration files
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
