@@ -21,6 +21,9 @@ def create_app():
     from app.employee_self_service import ess
     app.register_blueprint(ess, url_prefix='/ess')
 
+    from app.quality_checks import quality_checks
+    app.register_blueprint(quality_checks, url_prefix='/quality_checks')
+
     # Add a custom 404 error handler
     @app.errorhandler(404)
     def page_not_found(e):

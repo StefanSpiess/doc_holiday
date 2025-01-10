@@ -16,11 +16,13 @@ def get_git_commit():
 @main.route("/")
 def home():
     apps = [
-        {"name": "Employee Self Service", "icon": "bi-people", "url": "/ess"}
+        {"name": "Employee Self Service", "icon": "bi-people", "url": "/ess"},
+        {"name": "Quality Checks", "icon": "bi-check-circle", "url": "/quality_checks/entries"}
     ]
     app_version = get_git_commit()
     employee_id = "stefan.spiess"
     return render_template('index.html', apps=apps, app_version=app_version, employee_id=employee_id)
+
 
 @main.route("/about")
 def about():
